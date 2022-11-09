@@ -2,9 +2,9 @@ const { app } = require("./app");
 const { conect } = require("./databases/database");
 const dotenv = require("dotenv");
 
-// conect();
+dotenv.config({ path: `${__dirname}/.env` });
 
-dotenv.config({ path: "./env" });
+conect();
 
 const PORT = process.env.PORT || 4000;
 

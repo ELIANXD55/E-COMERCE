@@ -4,9 +4,16 @@ const { Product } = require("../models/product.model");
 
 exports.createProduct = async (req, res, next) => {
   try {
-    const { name, shortDescription, fullDescription, quantity, price } = req.body;
+    const { name, shortDescription, fullDescription, quantity, price, categoryId } =
+      req.body;
 
-    const product = Product.findOne({ name });
+    const product = await Product.findOne({ name });
+
+    // console.log(product);
+
+    console.log("--------------------------------");
+
+    console.log(storage);
 
     if (product) {
       res.status(400).json({
@@ -14,27 +21,28 @@ exports.createProduct = async (req, res, next) => {
         message: "There is already a product created with the given name",
         data: null
       });
+    } else {
+      const imgRef = ref(storage, `imgs/${Date.now()}-${req.file.originalname}`);
+
+      const result = await uploadBytes(imgRef, req.file.buffer);
+
+      const newProduct = await Product.create({
+        name,
+        shortDescription,
+        fullDescription,
+        quantity,
+        price,
+        picture: result.metadata.fullPath,
+        categoryId
+      });
+
+      res.status(201).json({
+        status: "success",
+        data: {
+          newProduct
+        }
+      });
     }
-
-    const imgRef = ref(storage, `imgs/${Date.now()}-${req.file.originalname}`);
-
-    const result = await uploadBytes(imgRef, req.file.buffer);
-
-    const newProduct = await Product.create({
-      name,
-      shortDescription,
-      fullDescription,
-      quantity,
-      price,
-      picture: result.metadata.fullPath
-    });
-
-    res.status(201).json({
-      status: "success",
-      data: {
-        newProduct
-      }
-    });
   } catch (error) {
     res.status(500).json({
       status: "error",
@@ -48,49 +56,59 @@ exports.getAllProducts = async (req, res, next) => {
   try {
     const products = await Product.find();
 
-    const productsPromises = products.map(
-      async ({
-        _id,
-        name,
-        shortDescription,
-        fullDescription,
-        quantity,
-        price,
-        picture
-      }) => {
-        const imgRef = ref(storage, picture);
-
-        const imgDownloadUrl = await getDownloadURL(imgRef);
-
-        return {
+    if (products.length === 0) {
+      res.status(404).json({
+        status: "error",
+        message: "No created products found",
+        data: null
+      });
+    } else {
+      const productsPromises = products.map(
+        async ({
           _id,
           name,
           shortDescription,
           fullDescription,
           quantity,
           price,
-          picture: imgDownloadUrl
-        };
+          picture,
+          categoryId
+        }) => {
+          const imgRef = ref(storage, picture);
+
+          const imgDownloadUrl = await getDownloadURL(imgRef);
+
+          return {
+            _id,
+            name,
+            shortDescription,
+            fullDescription,
+            quantity,
+            price,
+            picture: imgDownloadUrl,
+            categoryId
+          };
+        }
+      );
+
+      const resolvedProducts = await Promise.all(productsPromises);
+
+      if (products.length <= 0) {
+        res.status(404).json({
+          status: "error",
+          message: "Can't find products",
+          data: null
+        });
+      } else {
+        res.status(200).json({
+          status: "success",
+          message: "Data fetched successfully",
+          data: {
+            resolvedProducts
+          }
+        });
       }
-    );
-
-    const resolvedProducts = await Promise.all(productsPromises);
-
-    if (products.length <= 0) {
-      res.status(404).json({
-        status: "error",
-        message: "Can't find products",
-        data: null
-      });
     }
-
-    res.status(200).json({
-      status: "success",
-      message: "Data fetched successfully",
-      data: {
-        resolvedProducts
-      }
-    });
   } catch (error) {
     res.status(500).json({
       status: "error",
@@ -112,21 +130,21 @@ exports.getProductById = async (req, res, next) => {
         message: "cant find the post with the given id",
         data: null
       });
+    } else {
+      const imgRef = ref(storage, product.picture);
+
+      const imgDownloadUrl = await getDownloadURL(imgRef);
+
+      product.picture = imgDownloadUrl;
+
+      res.status(200).json({
+        status: "success",
+        message: "Data fetched successfully",
+        data: {
+          product
+        }
+      });
     }
-
-    const imgRef = ref(storage, product.picture);
-
-    const imgDownloadUrl = await getDownloadURL(imgRef);
-
-    product.picture = imgDownloadUrl;
-
-    res.status(200).json({
-      status: "success",
-      message: "Data fetched successfully",
-      data: {
-        product
-      }
-    });
   } catch (error) {
     res.status(500).json({
       status: "error",

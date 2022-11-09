@@ -12,20 +12,21 @@ exports.createCategory = async (req, res, next) => {
         message: "This category already exists",
         data: null
       });
+    } else {
+      const newCategory = await Category.create({
+        name
+      });
+
+      res.status(201).json({
+        status: "success",
+        message: "Has been created successfully",
+        data: {
+          newCategory
+        }
+      });
     }
-
-    const newCategory = await Category.create({
-      name
-    });
-
-    res.status(201).json({
-      status: "success",
-      message: "Has been created successfully",
-      data: {
-        newCategory
-      }
-    });
-  } catch (error) {
+  } catch (err) {
+    console.log(err.stack);
     res.status(500).json({
       status: "error",
       message: "An unexpected error occurred creating the category",
@@ -38,14 +39,23 @@ exports.getAllCategories = async (req, res, next) => {
   try {
     const categories = await Category.find();
 
-    res.status(200).json({
-      status: "success",
-      message: "Data fetched successfully",
-      data: {
-        categories
-      }
-    });
-  } catch (error) {
+    if (categories.length === 0) {
+      res.status(404).json({
+        status: "error",
+        message: "No created categories found",
+        data: null
+      });
+    } else {
+      res.status(200).json({
+        status: "success",
+        message: "Data fetched successfully",
+        data: {
+          categories
+        }
+      });
+    }
+  } catch (err) {
+    console.log(err.stack);
     res.status(500).json({
       status: "error",
       message: "An unexpected error occurred while fetching categories",
@@ -63,19 +73,20 @@ exports.getCategoryById = async (req, res, next) => {
     if (!category) {
       res.status(404).json({
         status: "error",
-        message: `Can't find categories with the id ${id}`,
+        message: `Can't find categories with the id`,
         data: null
       });
+    } else {
+      res.status(200).json({
+        status: "success",
+        message: "Data fetched successfully",
+        data: {
+          category
+        }
+      });
     }
-
-    res.status(200).json({
-      status: "success",
-      message: "Data fetched successfully",
-      data: {
-        category
-      }
-    });
-  } catch (error) {
+  } catch (err) {
+    console.log(err.stack);
     res.status(500).json({
       status: "error",
       message: "An unexpected error occurred searching for the category",

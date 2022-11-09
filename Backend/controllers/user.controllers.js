@@ -14,19 +14,22 @@ exports.getUserById = async (req, res, next) => {
     if (!user) {
       res.status(404).json({
         status: "error",
-        message: `Can't find users with the id ${id}`,
+        message: `Can't find users with the id`,
         data: null
       });
     }
 
-    res.status(200).json({
-      status: "success",
-      message: "Data fetched successfully",
-      data: {
-        user
-      }
-    });
-  } catch (error) {
+    if (user) {
+      res.status(200).json({
+        status: "success",
+        message: "Data fetched successfully",
+        data: {
+          user
+        }
+      });
+    }
+  } catch (err) {
+    console.log(err.stack);
     res.status(500).json({
       status: "error",
       message: "An unexpected error occurred searching for the user",
@@ -39,7 +42,7 @@ exports.createUsers = async (req, res, next) => {
   try {
     const { name, lastName, email, password, city, address, role } = req.body;
 
-    const salt = await bcrypt.salt(12);
+    const salt = await bcrypt.genSalt(12);
 
     const passwordCrypt = await bcrypt.hash(password, salt);
 
@@ -53,26 +56,29 @@ exports.createUsers = async (req, res, next) => {
       });
     }
 
-    const newUser = await User.create({
-      name,
-      lastName,
-      email,
-      password: passwordCrypt,
-      city,
-      address,
-      role
-    });
+    if (!user) {
+      const newUser = await User.create({
+        name,
+        lastName,
+        email,
+        password: passwordCrypt,
+        city,
+        address,
+        role
+      });
 
-    newUser.password = null; // Revisar si debe ser null o undefined
+      newUser.password = null;
 
-    res.status(201).json({
-      status: "success",
-      message: "Has been created successfully",
-      data: {
-        newUser
-      }
-    });
-  } catch (error) {
+      res.status(201).json({
+        status: "success",
+        message: "Has been created successfully",
+        data: {
+          newUser
+        }
+      });
+    }
+  } catch (err) {
+    console.log(err.stack);
     res.status(500).json({
       status: "error",
       message: "An unexpected error occurred creating the user",
@@ -87,9 +93,7 @@ exports.loginUser = async (req, res, next) => {
 
     const user = await User.findOne({ email });
 
-    const isValidPassword = await bcrypt.compare(password, user.password);
-
-    if (!user || !isValidPassword) {
+    if (!user) {
       res.status(404).json({
         status: "error",
         message: "Credentials are invalid",
@@ -97,18 +101,35 @@ exports.loginUser = async (req, res, next) => {
       });
     }
 
-    const token = await jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN
-    });
+    let isValidPassword = null;
 
-    res.status(200).json({
-      status: "success",
-      message: "You have successfully logged in",
-      data: {
-        token
+    if (user) {
+      isValidPassword = await bcrypt.compare(password, user.password);
+
+      if (!isValidPassword) {
+        res.status(404).json({
+          status: "error",
+          message: "Credentials are invalid",
+          data: null
+        });
       }
-    });
-  } catch (error) {
+    }
+
+    if (user && isValidPassword) {
+      const token = await jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN
+      });
+
+      res.status(200).json({
+        status: "success",
+        message: "You have successfully logged in",
+        data: {
+          token
+        }
+      });
+    }
+  } catch (err) {
+    console.log(err.stack);
     res.status(500).json({
       status: "error",
       message: "An unexpected error occurred while logging in",

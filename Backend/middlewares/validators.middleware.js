@@ -31,11 +31,7 @@ exports.userValidator = [
     .withMessage("Address must be a string")
     .notEmpty()
     .withMessage("Must provide a valid address"),
-  body("role")
-    .isString()
-    .withMessage("Role must be a string")
-    .notEmpty()
-    .withMessage("Must provide a valid role")
+  body("role").isEmpty().withMessage("Must provide a valid role")
 ];
 
 exports.productValidators = [
@@ -54,7 +50,7 @@ exports.productValidators = [
     .withMessage("Full description must be a String")
     .notEmpty()
     .withMessage("Must provide a valid fullDescription"),
-  body("Quantity")
+  body("quantity")
     .isNumeric()
     .withMessage("Quantity must be a Number")
     .custom((value) => value > 0)
@@ -67,7 +63,12 @@ exports.productValidators = [
     .custom((value) => value > 0)
     .withMessage("Price must be greater than 0")
     .notEmpty()
-    .withMessage("Must provide a valid price")
+    .withMessage("Must provide a valid price"),
+  body("categoryId")
+    .isString()
+    .withMessage("CategoryId must be a Number")
+    .notEmpty()
+    .withMessage("Must provide a valid CategoryId")
 ];
 
 exports.categoryValidators = [
@@ -77,3 +78,19 @@ exports.categoryValidators = [
     .notEmpty()
     .withMessage("Must provide a valid name")
 ];
+
+exports.validationResult = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const errorMsg = errors
+      .array()
+      .map((err) => err.msg)
+      .join(". ");
+    res.status(400).json({
+      message: errorMsg
+    });
+  } else {
+    next();
+  }
+};

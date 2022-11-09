@@ -1,4 +1,5 @@
 const express = require("express");
+const router = express.Router();
 
 const {
   createProduct,
@@ -6,20 +7,27 @@ const {
   getProductById
 } = require("../controllers/product.controllers");
 
-const { upload } = require("../utils/multer");
-
-const { productValidators } = require("../middlewares/validators.middleware");
+const {
+  productValidators,
+  validationResult
+} = require("../middlewares/validators.middleware");
 
 const { validateSession, protectAdmin } = require("../middlewares/auth.middleware");
 
-const router = express.Router();
+const { upload } = require("../utils/multer");
 
 router.use(validateSession);
 
 router
   .route("/")
   .get(getAllProducts)
-  .post(protectAdmin, productValidators, upload.single("productImg"), createProduct);
+  .post(
+    protectAdmin,
+    upload.single("productImg"),
+    productValidators,
+    validationResult,
+    createProduct
+  );
 
 router.route("/:id").get(getProductById);
 

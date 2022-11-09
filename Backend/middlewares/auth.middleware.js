@@ -23,21 +23,36 @@ exports.validateSession = async (req, res, next) => {
     });
   }
 
-  const decodedToken = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  if (token) {
+    let decodedToken;
+    try {
+      decodedToken = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    } catch (error) {
+      res.status(401).json({
+        status: "error",
+        message: "Invalid session",
+        data: null
+      });
+    }
 
-  const user = await User.findOne({ email: decodedToken }).select("-password");
+    if (decodedToken) {
+      const user = await User.findOne({ email: decodedToken.email }).select("-password");
 
-  if (!user) {
-    res.status(401).json({
-      status: "error",
-      message: "Invalid session",
-      data: null
-    });
+      if (!user) {
+        res.status(401).json({
+          status: "error",
+          message: "Invalid session",
+          data: null
+        });
+      }
+
+      if (user) {
+        req.currentUser = user;
+
+        next();
+      }
+    }
   }
-
-  req.currentUser = user;
-
-  next();
 };
 
 exports.protectAdmin = async (req, res, next) => {
@@ -47,6 +62,7 @@ exports.protectAdmin = async (req, res, next) => {
       message: "Access denied",
       data: null
     });
+  } else {
+    next();
   }
-  next();
 };

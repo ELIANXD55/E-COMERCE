@@ -29,6 +29,10 @@ const productSchema = new Schema({
     type: Number,
     required: true
   },
+  categoryId: {
+    type: String
+    // ref: "Category"
+  },
   status: {
     type: String,
     required: true,
