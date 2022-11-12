@@ -1,0 +1,49 @@
+.home {
+  height: 70vh;
+}
+
+.banner {
+  height: 30%;
+  /* height: 15rem; */
+  background-image: url("../../utils/img/banner.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.home-index {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-title {
+  font-family: "Inter";
+  text-align: center;
+  font-weight: 700;
+  font-size: 4rem;
+  color: #4aab28;
+  margin: 0.5rem;
+}
+
+.home-short-description {
+  font-family: "Inter";
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #00000078;
+  margin: 0.5rem;
+}
+
+.button-home {
+  background-color: #71b619;
+  color: #ffffff;
+  border: none;
+  font-family: "Inter";
+  width: 5rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  margin: 1rem;
+}
