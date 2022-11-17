@@ -2,9 +2,8 @@
   height: 70vh;
 }
 
-.banner {
+.home-banner {
   height: 30%;
-  /* height: 15rem; */
   background-image: url("../../utils/img/banner.png");
   background-repeat: no-repeat;
   background-size: 100%;

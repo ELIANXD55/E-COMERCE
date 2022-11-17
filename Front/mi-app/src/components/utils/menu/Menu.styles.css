@@ -1,0 +1,29 @@
+span.navbar-brand {
+  font-size: var(--font-md);
+  font-weight: 700;
+}
+
+a.nav-link {
+  font-size: var(--font-md);
+  font-weight: 500;
+  margin: 0 1rem;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.menu-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  padding: 0.5rem;
+}
+
+.navbar {
+  padding: 0;
+  height: 10vh;
+}

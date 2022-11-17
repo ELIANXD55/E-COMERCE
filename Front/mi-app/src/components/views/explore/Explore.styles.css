@@ -1,0 +1,41 @@
+.container-explore {
+  height: 70vh;
+  width: 60%;
+  margin: auto;
+}
+
+.explore-img {
+  width: 25rem;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.input-border {
+  border: 0.5px solid black;
+}
+
+.button-explore {
+  background-color: #71b619;
+  color: #ffffff;
+  border: none;
+  font-family: "Inter";
+  width: 5rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  margin: 1rem;
+}
+
+@media (max-width: 1375px) {
+  .explore-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 1255px) {
+  .explore-img {
+    width: 20rem;
+  }
+}

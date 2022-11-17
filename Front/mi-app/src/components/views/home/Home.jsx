@@ -4,7 +4,7 @@ import "./Home.styles.css";
 const Home = () => {
   return (
     <section className="home">
-      <div className="banner"></div>
+      <div className="home-banner"></div>
       <div className="home-index">
         <h1 className="home-title">Sabores del Mundo</h1>
         <p className="home-short-description">
