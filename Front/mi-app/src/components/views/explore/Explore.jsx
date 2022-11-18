@@ -9,7 +9,7 @@ const Explore = () => {
     <section className="container-explore">
       <h1 className="title">Sabores del Mundo</h1>
       <div className="d-flex justify-content-between pt-4">
-        <div>
+        <div className="d-flex justify-content-center align-items-center flex-column">
           <h2 className="explore-title">
             <strong>Busca nuevas experiencias</strong>
           </h2>

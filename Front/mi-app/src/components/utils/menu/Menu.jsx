@@ -9,7 +9,7 @@ import "./Menu.styles.css";
 function Menu() {
   return (
     <Navbar>
-      <Container>
+      <Container className="container-menu-grid">
         <Row className="menu">
           <Col xs={12} md={6}>
             <Navbar.Brand to={`/`}>

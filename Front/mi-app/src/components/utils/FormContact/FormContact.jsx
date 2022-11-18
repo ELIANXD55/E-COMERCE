@@ -26,38 +26,38 @@ function FormContact() {
           <h2 className="subtitle-form">Contactanos</h2>
           <Row className="mb-3">
             <Form.Group as={Col} md="6" controlId="validationCustom01">
-              <Form.Label>NOMBRE COMPLETO</Form.Label>
-              <Form.Control required type="text" placeholder="Name" />
+              <Form.Label>Nombre Completo</Form.Label>
+              <Form.Control required type="text" placeholder="Nombre" />
               <Form.Control.Feedback type="invalid">
-                Please provide your name.
+                Por favor ingresa un nombre.
               </Form.Control.Feedback>
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback>¡Se ve bien!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="6" controlId="validationCustom02">
-              <Form.Label>CORREO ELECTRONICO</Form.Label>
-              <Form.Control required type="text" placeholder="Email" />
+              <Form.Label>Correo Electrónico</Form.Label>
+              <Form.Control required type="email" placeholder="Correo" />
               <Form.Control.Feedback type="invalid">
-                Please provide your email.
+                Por favor ingresa un correo.
               </Form.Control.Feedback>
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback>¡Se ve bien!</Form.Control.Feedback>
             </Form.Group>
           </Row>
           <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom03">
-              <Form.Label>SUBJECT</Form.Label>
-              <Form.Control required type="text" placeholder="Subject" />
+              <Form.Label>Asunto</Form.Label>
+              <Form.Control required type="text" placeholder="Asunto" />
               <Form.Control.Feedback type="invalid">
-                Please provide a subject.
+                Por favor ingresa un asunto.
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
           <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom03">
-              <Form.Label>MENSAJE</Form.Label>
-              <Form.Control as="textarea" rows={3} placeholder="Message" />
+              <Form.Label>Mensaje</Form.Label>
+              <Form.Control as="textarea" rows={3} placeholder="Mensaje" />
             </Form.Group>
           </Row>
-          <Button variant="success" type="submit">
+          <Button variant="success" type="submit" className="button-contact">
             Enviar Mensaje
           </Button>
         </div>

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import Policies from "../policies/Policies";
+// import Policies from "../policies/Policies";
 import "./FormAcount.styles.css";
 
 function FormAcount() {
@@ -27,46 +27,46 @@ function FormAcount() {
           <h2 className="subtitle-form">Crea tu cuenta</h2>
           <Row className="mb-3">
             <Form.Group as={Col} md="6" controlId="validationCustom01">
-              <Form.Control required type="text" placeholder="Names" />
+              <Form.Control required type="text" placeholder="Nombre" />
               <Form.Control.Feedback type="invalid">
-                Please provide a name.
+                Por favor ingresa un nombre.
               </Form.Control.Feedback>
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback>¡Se ve bien!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="6" controlId="validationCustom02">
-              <Form.Control required type="text" placeholder="Last name" />
+              <Form.Control required type="text" placeholder="Apellido" />
               <Form.Control.Feedback type="invalid">
-                Please provide a last name.
+                Por favor ingresa un apellido.
               </Form.Control.Feedback>
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback>¡Se ve bien!</Form.Control.Feedback>
             </Form.Group>
           </Row>
           <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom03">
-              <Form.Control required type="text" placeholder="email" />
+              <Form.Control required type="email" placeholder="Correo" />
               <Form.Control.Feedback type="invalid">
-                Please provide a email.
+                Por favor ingresa un correo.
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
           <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom03">
-              <Form.Control required type="password" placeholder="password" />
+              <Form.Control required type="password" placeholder="Contraseña" />
               <Form.Control.Feedback type="invalid">
-                Please provide a password.
+                Por favor ingresa una contraseña.
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
           <Row>
             <Col md={{ span: 6, offset: 3 }}>
-              <Button variant="success" size="lg" type="submit">
+              <Button variant="success" type="submit" className="button-signup">
                 Registro
               </Button>
             </Col>
           </Row>
         </div>
       </Form>
-      <Policies />
+      {/* <Policies /> */}
     </Container>
   );
 }

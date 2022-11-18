@@ -5,6 +5,7 @@ import Menu from "./components/utils/menu/Menu";
 import SignUp from "./components/views/signUp/SignUp";
 import Contact from "./components/views/contact/Contact";
 import Explore from "./components/views/explore/Explore";
+import Login from "./components/views/login/Login";
 import PageNotFound from "./components/views/404/PageNotFound";
 import "./reset.styles.css";
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signUp" exact element={<SignUp />} />
           <Route path="/contact" exact element={<Contact />} />
           <Route path="/explore" exact element={<Explore />} />
+          <Route path="/login" exact element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />

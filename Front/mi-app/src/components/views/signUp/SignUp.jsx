@@ -10,9 +10,13 @@ function Login() {
   return (
     <section style={{ height: "70vh" }}>
       <h1 className="title">Sabores del Mundo</h1>
-      <Container>
+      <Container className="container-signup-grid">
         <Row>
-          <Col xs={12} md={6}>
+          <Col
+            xs={12}
+            md={6}
+            className="d-flex justify-content-center align-items-center"
+          >
             <FormAcount />
           </Col>
           <Col xs={12} md={6}>

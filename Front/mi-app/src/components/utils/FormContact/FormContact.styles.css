@@ -24,16 +24,6 @@
   margin-bottom: 1.3rem;
 }
 
-.policies {
-  color: rgba(0, 0, 0, 0.56);
-  font-size: var(--font-sm);
-  font-weight: var(--regular);
-  letter-spacing: 0.05em;
-  margin-top: 2rem;
-  padding: 0 1.1rem;
-  text-align: center;
-}
-
 /* contact us */
 .contact-section {
   box-shadow: 3px 2px 40px 1px rgba(79, 74, 74, 0.81);
@@ -68,6 +58,17 @@
 label.form-label {
   font-weight: var(--bold);
   font-size: var(--font-md);
+}
+
+.button-contact {
+  background-color: #71b619 !important;
+  color: #ffffff;
+  border: none;
+  font-family: "Inter";
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
 }
 
 @media (max-width: 575.98px) {
