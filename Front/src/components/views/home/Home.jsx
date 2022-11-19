@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Home.styles.css";
 
 const Home = () => {
@@ -10,7 +11,11 @@ const Home = () => {
         <p className="home-short-description">
           Conoce la gastronomia internacional y sus sabores a un solo clic
         </p>
-        <button className="button-home">Explorar</button>
+        <button className="button-home">
+          <Link to="/explore" className="link">
+            Explorar
+          </Link>
+        </button>
       </div>
     </section>
   );

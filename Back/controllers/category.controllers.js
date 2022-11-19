@@ -37,9 +37,9 @@ exports.createCategory = async (req, res, next) => {
 
 exports.getAllCategories = async (req, res, next) => {
   try {
-    const categories = await Category.find();
+    const response = await Category.find();
 
-    if (categories.length === 0) {
+    if (response.length === 0) {
       res.status(404).json({
         status: "error",
         message: "No created categories found",
@@ -50,7 +50,7 @@ exports.getAllCategories = async (req, res, next) => {
         status: "success",
         message: "Data fetched successfully",
         data: {
-          categories
+          response
         }
       });
     }

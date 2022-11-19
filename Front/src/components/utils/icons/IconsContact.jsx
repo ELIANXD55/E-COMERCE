@@ -17,7 +17,7 @@ function IconsContact() {
           <p className="text-center">
             <b>Dirección:</b>
             <br />
-            <span>Pereira, Risaralda, Colombia</span>
+            <span className="item">Pereira, Risaralda, Colombia</span>
           </p>
         </div>
       </Col>

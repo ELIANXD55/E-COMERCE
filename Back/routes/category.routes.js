@@ -15,7 +15,7 @@ const { validateSession, protectAdmin } = require("../middlewares/auth.middlewar
 
 const router = express.Router();
 
-router.use(validateSession);
+// router.use(validateSession);
 
 router
   .route("/")

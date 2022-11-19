@@ -20,14 +20,14 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  city: {
-    type: String,
-    required: true
-  },
-  address: {
-    type: String,
-    required: true
-  },
+  // city: {
+  //   type: String,
+  //   required: true
+  // },
+  // address: {
+  //   type: String,
+  //   required: true
+  // },
   status: {
     type: String,
     required: true,

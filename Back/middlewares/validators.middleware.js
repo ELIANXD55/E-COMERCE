@@ -20,18 +20,18 @@ exports.userValidator = [
     .isString()
     .withMessage("Password must be a string")
     .notEmpty()
-    .withMessage("Must provide a valid password"),
-  body("city")
-    .isString()
-    .withMessage("City must be a string")
-    .notEmpty()
-    .withMessage("Must provide a valid city"),
-  body("address")
-    .isString()
-    .withMessage("Address must be a string")
-    .notEmpty()
-    .withMessage("Must provide a valid address"),
-  body("role").isEmpty().withMessage("Must provide a valid role")
+    .withMessage("Must provide a valid password")
+  // body("city")
+  //   .isString()
+  //   .withMessage("City must be a string")
+  //   .notEmpty()
+  //   .withMessage("Must provide a valid city"),
+  // body("address")
+  //   .isString()
+  //   .withMessage("Address must be a string")
+  //   .notEmpty()
+  //   .withMessage("Must provide a valid address"),
+  // body("role").isEmpty().withMessage("Must provide a valid role")
 ];
 
 exports.productValidators = [

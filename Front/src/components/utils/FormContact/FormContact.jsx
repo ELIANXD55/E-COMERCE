@@ -23,7 +23,7 @@ function FormContact() {
     <Container>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <div className="container-form contact">
-          <h2 className="subtitle-form">Contactanos</h2>
+          <h2 className="subtitle-form">Contáctanos</h2>
           <Row className="mb-3">
             <Form.Group as={Col} md="6" controlId="validationCustom01">
               <Form.Label>Nombre Completo</Form.Label>

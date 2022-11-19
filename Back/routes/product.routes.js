@@ -16,18 +16,15 @@ const { validateSession, protectAdmin } = require("../middlewares/auth.middlewar
 
 const { upload } = require("../utils/multer");
 
-router.use(validateSession);
+// router.use(validateSession);
 
-router
-  .route("/")
-  .get(getAllProducts)
-  .post(
-    protectAdmin,
-    upload.single("productImg"),
-    productValidators,
-    validationResult,
-    createProduct
-  );
+router.route("/").get(getAllProducts).post(
+  // protectAdmin,
+  upload.single("productImg"),
+  productValidators,
+  validationResult,
+  createProduct
+);
 
 router.route("/:id").get(getProductById);
 

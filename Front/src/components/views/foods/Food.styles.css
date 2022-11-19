@@ -1,0 +1,13 @@
+.foods {
+  min-height: 70vh;
+}
+
+.foods-container {
+  width: 60%;
+  margin: auto;
+}
+
+.not-found {
+  font-size: 2rem;
+  margin-top: 10rem;
+}

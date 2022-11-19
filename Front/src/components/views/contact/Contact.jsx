@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Banner from "../../utils/banner/Banner";
-import FormContact from "../../utils/FormContact/FormContact";
+import FormContact from "../../utils/formContact/FormContact";
 import IconsContact from "../../utils/icons/IconsContact";
 import "./Contact.styles.css";
 

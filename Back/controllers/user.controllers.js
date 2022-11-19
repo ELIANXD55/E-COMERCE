@@ -40,7 +40,8 @@ exports.getUserById = async (req, res, next) => {
 
 exports.createUsers = async (req, res, next) => {
   try {
-    const { name, lastName, email, password, city, address, role } = req.body;
+    // const { name, lastName, email, password, city, address, role } = req.body;
+    const { name, lastName, email, password } = req.body;
 
     const salt = await bcrypt.genSalt(12);
 
@@ -61,10 +62,7 @@ exports.createUsers = async (req, res, next) => {
         name,
         lastName,
         email,
-        password: passwordCrypt,
-        city,
-        address,
-        role
+        password: passwordCrypt
       });
 
       newUser.password = null;

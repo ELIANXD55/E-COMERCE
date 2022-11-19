@@ -9,6 +9,17 @@ a.nav-link {
   margin: 0 1rem;
 }
 
+.navbar-text {
+  font-size: var(--font-md);
+  font-weight: 500;
+  margin: 0 1rem;
+}
+
+.navbar-text a {
+  text-decoration: none;
+  color: var(--bs-nav-link-color);
+}
+
 .menu {
   display: flex;
   align-items: center;
@@ -26,6 +37,21 @@ a.nav-link {
 .navbar {
   padding: 0;
   height: 10vh;
+}
+
+.menu-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.menu-hidden {
+  display: none !important;
+}
+
+.navbar-text a:hover {
+  color: var(--bs-navbar-hover-color);
 }
 
 @media (min-width: 1400px) {

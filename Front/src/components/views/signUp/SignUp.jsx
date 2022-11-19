@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import FormAcount from "../../utils/FormAcount/FormAcount";
+import FormAcount from "../../utils/formAcount/FormAcount";
 import Banner from "../../utils/banner/Banner";
 import "./SignUp.styles.css";
 

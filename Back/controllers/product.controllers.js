@@ -9,12 +9,6 @@ exports.createProduct = async (req, res, next) => {
 
     const product = await Product.findOne({ name });
 
-    // console.log(product);
-
-    console.log("--------------------------------");
-
-    console.log(storage);
-
     if (product) {
       res.status(400).json({
         status: "error",
@@ -91,7 +85,7 @@ exports.getAllProducts = async (req, res, next) => {
         }
       );
 
-      const resolvedProducts = await Promise.all(productsPromises);
+      const response = await Promise.all(productsPromises);
 
       if (products.length <= 0) {
         res.status(404).json({
@@ -104,7 +98,7 @@ exports.getAllProducts = async (req, res, next) => {
           status: "success",
           message: "Data fetched successfully",
           data: {
-            resolvedProducts
+            response
           }
         });
       }

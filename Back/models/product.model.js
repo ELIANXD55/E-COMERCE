@@ -30,7 +30,8 @@ const productSchema = new Schema({
     required: true
   },
   categoryId: {
-    type: String
+    type: String,
+    required: true
     // ref: "Category"
   },
   status: {
