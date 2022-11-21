@@ -28,6 +28,10 @@
   margin: 1rem;
 }
 
+.explore__spinner {
+  margin: 1rem;
+}
+
 @media (max-width: 1375px) {
   .explore-title {
     font-size: 1.5rem;

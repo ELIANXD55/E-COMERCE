@@ -54,7 +54,7 @@ function Menu({ isLogin }) {
                 Registrarse
               </Nav.Link>
               <Nav.Link
-                href={`/`}
+                href={`/profile`}
                 className={isValidateToken ? "menu-display" : "menu-hidden"}
               >
                 Perfil

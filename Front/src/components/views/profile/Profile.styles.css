@@ -1,0 +1,14 @@
+.profile {
+  height: 70vh;
+  width: 60%;
+  margin: auto;
+}
+
+.profile__info {
+  width: 100%;
+}
+
+.profile__spinner {
+  width: 100%;
+  text-align: center;
+}

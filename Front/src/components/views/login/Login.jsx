@@ -1,18 +1,25 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import img_l from "../../utils/img/img_login.png";
+import Loader from "../../utils/loader/Loader";
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
 import "./Login.styles.css";
 
 function Login({ setIsLogin, isLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const login = (e) => {
+    setIsLoading(true);
     e.preventDefault();
     const data = {
       email,
-      password,
+      password
     };
     axios
       .post(`http://localhost:4000/api/v1/users/login`, data)
@@ -21,19 +28,23 @@ function Login({ setIsLogin, isLogin }) {
           icon: "success",
           title: "Inicio de sesión exitoso",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 2000
         });
         sessionStorage.setItem("token", res.data.data.token);
         setIsLogin(!isLogin);
         setEmail("");
         setPassword("");
+        setIsLoading(false);
+        setTimeout(() => {
+          navigate(`/`);
+        }, 2001);
       })
       .catch(() => {
         Swal.fire({
           icon: "error",
           title: "Credenciales invalidas",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 2000
         });
         setEmail("");
         setPassword("");
@@ -41,7 +52,11 @@ function Login({ setIsLogin, isLogin }) {
   };
 
   return (
-    <section className="container-login">
+    <motion.section
+      className="container-login"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <h1 className="title">Sabores del Mundo</h1>
       <div className="login-container-flex">
         <div className="login-container-form">
@@ -68,14 +83,18 @@ function Login({ setIsLogin, isLogin }) {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button className="login-btn">Crear nueva cuenta</button>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <button className="login-btn">Iniciar sesión</button>
+            )}
           </form>
         </div>
         <div>
           <img src={img_l} alt="dish" className="login-img" />
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

@@ -2,23 +2,32 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Img from "../../utils/img/Ellipse 1.png";
+import Loader from "../../utils/loader/Loader";
+import { motion } from "framer-motion";
 import "./Explore.styles.css";
 
 const Explore = () => {
   const [isFilter, setIsFilter] = useState(false);
   const [filter, setFilter] = useState("");
   const [response, setResponse] = useState([]);
-  // const [notFound, setNotFound] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const submitForm = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     let filterType = isFilter ? "products" : "categories";
     axios
       .get(`http://localhost:4000/api/v1/${filterType}`)
-      .then((res) => setResponse(res.data.data.response))
-      .catch((e) => console.log(e));
+      .then((res) => {
+        setResponse(res.data.data.response);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        setFilter("");
+      });
   };
 
   useEffect(() => {
@@ -33,7 +42,11 @@ const Explore = () => {
   }, [response, filter, navigate, isFilter]);
 
   return (
-    <section className="container-explore">
+    <motion.section
+      className="container-explore"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <h1 className="title">Sabores del Mundo</h1>
       <div className="d-flex justify-content-between pt-4">
         <div className="d-flex justify-content-center align-items-center flex-column">
@@ -59,11 +72,18 @@ const Explore = () => {
                   isFilter ? "Buscar por nombre" : "Buscar por categoria"
                 }
                 className="p-1 mt-3 rounded input-border"
+                value={filter}
                 onChange={(e) => setFilter(e.target.value)}
               />
             </div>
             <div className="d-flex justify-content-center">
-              <button className="button-explore">Buscar</button>
+              {isLoading ? (
+                <div className="explore__spinner">
+                  <Loader />
+                </div>
+              ) : (
+                <button className="button-explore">Buscar</button>
+              )}
             </div>
           </form>
         </div>
@@ -71,7 +91,7 @@ const Explore = () => {
           <img className="explore-img" src={Img} alt="tacos" />
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

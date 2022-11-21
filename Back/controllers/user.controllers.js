@@ -135,3 +135,11 @@ exports.loginUser = async (req, res, next) => {
     });
   }
 };
+
+exports.currentUser = async (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    message: "Has been created successfully",
+    data: req.currentUser
+  });
+};
