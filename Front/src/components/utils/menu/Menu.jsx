@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -32,41 +33,48 @@ function Menu({ isLogin }) {
           </Col>
           <Col xs={12} md={6}>
             <Nav className="me-auto menu-nav">
-              <Nav.Link href={`/`} className="menu-display">
+              <Link to="/" className="menu-display navbar-text">
                 Inicio
-              </Nav.Link>
-              <Nav.Link href={`/explore`} className="menu-display">
+              </Link>
+              <Link to="/explore" className="menu-display navbar-text">
                 Explorar
-              </Nav.Link>
-              <Nav.Link href={`/contact/`} className="menu-display">
+              </Link>
+              <Link to="/contact" className="menu-display navbar-text">
                 Contacto
-              </Nav.Link>
-              <Nav.Link
-                href={`/login/`}
-                className={isValidateToken ? "menu-hidden" : "menu-display"}
+              </Link>
+              <Link
+                to="/login"
+                className={
+                  isValidateToken ? "menu-hidden" : "menu-display navbar-text"
+                }
               >
                 Iniciar Sesión
-              </Nav.Link>
-              <Nav.Link
-                href={`/signup/`}
-                className={isValidateToken ? "menu-hidden" : "menu-display"}
+              </Link>
+              <Link
+                to="/signup"
+                className={
+                  isValidateToken ? "menu-hidden" : "menu-display navbar-text"
+                }
               >
                 Registrarse
-              </Nav.Link>
-              <Nav.Link
-                href={`/profile`}
-                className={isValidateToken ? "menu-display" : "menu-hidden"}
+              </Link>
+              <Link
+                to="/profile"
+                className={
+                  isValidateToken ? "menu-display navbar-text" : "menu-hidden"
+                }
               >
                 Perfil
-              </Nav.Link>
-              <Navbar.Text
+              </Link>
+              <Link
+                to="/"
                 className={
                   isValidateToken ? "menu-display navbar-text" : "menu-hidden"
                 }
                 onClick={(e) => signOff(e)}
               >
-                <a href="/">Cerrar sesión</a>
-              </Navbar.Text>
+                Cerrar sesión
+              </Link>
             </Nav>
           </Col>
         </Row>

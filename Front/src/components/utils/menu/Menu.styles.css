@@ -44,6 +44,7 @@ a.nav-link {
   justify-content: center;
   align-items: center;
   text-align: center;
+  text-decoration: none;
 }
 
 .menu-hidden {
