@@ -5,7 +5,7 @@ Esta enfocado a la compra y venta de comida con sabores internacionales pero com
 
 ## Deploy
 
-Pendiente
+Puedes encontrarnos en: https://heroic-biscochitos-f1d270.netlify.app/
 
 ## Instación
 
